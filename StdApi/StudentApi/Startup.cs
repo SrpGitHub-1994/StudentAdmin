@@ -7,10 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using StudentApi.DataModels;
 
 namespace StudentApi
 {
@@ -28,6 +27,9 @@ namespace StudentApi
         {
 
             services.AddControllers();
+            services.AddDbContext<SAContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("MyCon")
+                ));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentApi", Version = "v1" });
