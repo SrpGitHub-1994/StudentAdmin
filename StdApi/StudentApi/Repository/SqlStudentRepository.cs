@@ -1,6 +1,8 @@
 ﻿using StudentApi.DataModels;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace StudentApi.Repository
 {
@@ -12,9 +14,12 @@ namespace StudentApi.Repository
         {
             this.context = context;
         }
-        public List<Student> GetStudents()
+        public async Task<List<Student>> GetStudents()
         {
-           return context.Students.ToList();
+            return await context.Students               
+                .Include(nameof(Address))
+                .Include(nameof(Gender))
+                .ToListAsync();
         }
     }
 }

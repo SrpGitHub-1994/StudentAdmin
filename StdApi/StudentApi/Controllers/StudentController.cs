@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentApi.Repository;
+using System.Threading.Tasks;
 
 namespace StudentApi.Controllers
 {
@@ -14,9 +15,10 @@ namespace StudentApi.Controllers
         }
         [HttpGet]
         [Route("[controller]")]
-        public IActionResult GetAllStudent()
+        public async Task<IActionResult> GetAllStudent()
         {
-            return Ok(studentrepository.GetStudents());
+            var StdList = await studentrepository.GetStudents();
+            return Ok(StdList);
         }
     }
 }

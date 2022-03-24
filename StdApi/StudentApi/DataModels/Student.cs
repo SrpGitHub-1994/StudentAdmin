@@ -15,11 +15,10 @@ namespace StudentApi.DataModels
         public string Emailid { get; set; }
         public long MobileNo { get; set; }
         public string ProfileImg { get; set; }
-
         public Guid Genderid { get; set; }
 
         //Navigation property
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
 
         public Address Address { get; set; }
 
